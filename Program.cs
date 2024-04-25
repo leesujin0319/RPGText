@@ -477,7 +477,7 @@ namespace RPGText
                     break;
 
             }
-
+            // 뭐여
 
         }
 
