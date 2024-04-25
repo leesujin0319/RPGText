@@ -468,6 +468,9 @@ namespace RPGText
                         // 아이템 판매 및 골드 추가
                         character.Gold += (int)(selectedItem.Gold * 0.85);
                         Inventory.PurchaseItems.Remove(selectedItem);
+                        // 다시 원상태로
+                        character.Attack -= selectedItem.AttackPower;
+                        character.Defense -= selectedItem.DefensePower;
 
                     }
                     else
