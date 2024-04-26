@@ -52,18 +52,21 @@ namespace RPGText
                     // 상태 보기
                     case 1:
                         ShowStatus.DisplayStatus(character, item);
+                        Console.Clear();
                         break;
 
                     // 인벤토리 
                     case 2:
                         Inventory.ShowItems(character);
+                        Console.Clear();
                         break;
 
                     // 상점 
                     case 3:Store.ShowStore(inventory, character);
+                        Console.Clear();
                         break;
 
-                    default: Console.WriteLine("다시 입력해주세요! "); break;
+                    default: Console.WriteLine("다시 입력해주세요! "); Console.Clear(); break;
                 }
             }
 
@@ -99,16 +102,18 @@ namespace RPGText
     {
         public static bool DisplayStatus(Character character, Item item)
         {
+            Console.Clear();
+            
             Console.WriteLine("\n**상태 보기**");
             Console.WriteLine("캐릭터의 상태가 표시됩니다.");
             Console.WriteLine();
             Console.WriteLine();
             Console.WriteLine($"Lv. {character.Level}");
             Console.WriteLine($"{character.Name} ( {character.Job} )");
-            string AP = item.AttackPower > 0 ? $"{item.AttackPower}" : "";
-            Console.WriteLine($"공격력 : {character.Attack} (+ {AP})");
-            string DP = item.DefensePower > 0 ? $"{item.DefensePower}" : "";
-            Console.WriteLine($"방어력 : {character.Defense} (+ {DP})");
+            string AP = item.AttackPower > 0 ? $"(+ {item.AttackPower})" : "";
+            Console.WriteLine($"공격력 : {character.Attack}" + AP);
+            string DP = item.DefensePower > 0 ? $"(+ {item.DefensePower})" : "";
+            Console.WriteLine($"방어력 : {character.Defense}" + DP);
             Console.WriteLine($"체 력 : {character.Health}");
             Console.WriteLine($"Gold : {character.Gold} G");
 
@@ -168,6 +173,8 @@ namespace RPGText
 
         public static void ShowItems(Character character)
         {
+            Console.Clear();
+
             Console.WriteLine("\n**인벤토리**");
             Console.WriteLine("보유 중인 아이템을 관리할 수 있습니다.");
             Console.WriteLine();
@@ -212,6 +219,7 @@ namespace RPGText
 
         public static void ShowEquippedItems(Character character)
         {
+            Console.Clear();
 
             Console.WriteLine("\n**인벤토리 - 장착관리**");
             Console.WriteLine("보유 중인 아이템을 관리할 수 있습니다.");
@@ -271,7 +279,7 @@ namespace RPGText
                         equippedItems.Add(selectedItem);
                         Console.WriteLine($"아이템 '{selectedItem.Name}'을(를) 장착했습니다.");
                         c.Attack += selectedItem.AttackPower;
-                        c.Defense += selectedItem.DefensePower; 
+                        c.Defense += selectedItem.DefensePower;
                         UpdateCharacter(c, selectedItem);
                     }
                     else
@@ -339,6 +347,8 @@ namespace RPGText
 
         public static void ShowStore(Inventory inventory, Character character)
         {
+            Console.Clear();
+
             Console.WriteLine("**상점**");
             Console.WriteLine("필요한 아이템을 얻을 수 있는 상점입니다.");
             Console.WriteLine();
@@ -385,7 +395,9 @@ namespace RPGText
 
         static void PurchasedMogi(Character character, Inventory inventory)
         {
-         
+            Console.Clear();
+
+
             for (int i = 0; i < Inventory.items.Count; i++)
             {
                 string status = Inventory.items[i].Purchase ? "구매완료" : $"{Inventory.items[i].Gold} G";
@@ -431,6 +443,9 @@ namespace RPGText
 
         static void Resale(Character character,Inventory inventory)
         {
+            Console.Clear();
+
+
             Console.WriteLine();
             Console.WriteLine();
             Console.WriteLine("상점 - 아이템 판매");
@@ -462,6 +477,8 @@ namespace RPGText
             {
                 case 0: return;
                 default:
+                    Console.Clear();
+
                     // 사용자 입력에 따라 선택된 아이템 인덱스 계산
                     int selectedItemIndex = input - 1;
                     Item selectedItem = Inventory.PurchaseItems[selectedItemIndex];
