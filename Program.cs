@@ -16,6 +16,8 @@ namespace RPGText
             // 인벤토리 생성
             Inventory inventory = new Inventory();
 
+            Item item = new Item();
+
             Item Armor1 = new Item("수련자의 갑옷", " 수련에 도움을 주는 갑옷입니다. ", 0, 5, 1000);
             Item Armor = new Item("무쇠 갑옷", "무쇠로 만들어져 튼튼한 갑옷입니다.", 0, 9, 2000);
             Item SpartaArmor = new Item("스파르타의 갑옷", "스파르타의 전사들이 사용했다는 전설의 갑옷입니다.", 0, 15, 3500);
@@ -49,7 +51,7 @@ namespace RPGText
                 {
                     // 상태 보기
                     case 1:
-                        ShowStatus.DisplayStatus(character);
+                        ShowStatus.DisplayStatus(character, item);
                         break;
 
                     // 인벤토리 
@@ -95,7 +97,7 @@ namespace RPGText
 
     public class ShowStatus
     {
-        public static bool DisplayStatus(Character character)
+        public static bool DisplayStatus(Character character, Item item)
         {
             Console.WriteLine("\n**상태 보기**");
             Console.WriteLine("캐릭터의 상태가 표시됩니다.");
@@ -103,8 +105,10 @@ namespace RPGText
             Console.WriteLine();
             Console.WriteLine($"Lv. {character.Level}");
             Console.WriteLine($"{character.Name} ( {character.Job} )");
-            Console.WriteLine($"공격력 : {character.Attack}");
-            Console.WriteLine($"방어력 : {character.Defense}");
+            string AP = item.AttackPower > 0 ? $"{item.AttackPower}" : "";
+            Console.WriteLine($"공격력 : {character.Attack} (+ {AP})");
+            string DP = item.DefensePower > 0 ? $"{item.DefensePower}" : "";
+            Console.WriteLine($"방어력 : {character.Defense} (+ {DP})");
             Console.WriteLine($"체 력 : {character.Health}");
             Console.WriteLine($"Gold : {character.Gold} G");
 
@@ -133,6 +137,11 @@ namespace RPGText
         public int Gold { get; } // 가격
 
         public bool Purchase { get; set; }
+
+        public Item()
+        {
+
+        }
 
         public Item(string name, string description, int attack, int defense, int gold)
         {
@@ -304,7 +313,7 @@ namespace RPGText
             bool set = false;  // 아이템 착용 , 미착용
             //만약에 추가가 됐다면 실행
 
-            ShowStatus.DisplayStatus(character);
+            ShowStatus.DisplayStatus(character, item);
 
         }
     }
